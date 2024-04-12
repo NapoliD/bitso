@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from monitor_order_books import monitor_order_books
+from bid_ask import monitor_order_books
 
 default_args = {
     'owner': 'airflow',
@@ -9,24 +9,22 @@ default_args = {
     'start_date': datetime(2024, 4, 1),
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retries': 0,  # Set to 0 to disable retries
 }
 
 dag = DAG(
-    'monitor_bitcoin_order_books',
+    'continuous_order_book_monitoring',
     default_args=default_args,
-    description='Monitor Bitcoin order books',
-    schedule_interval=timedelta(minutes=10),  # Adjust the interval as needed
+    description='Periodically monitor order books continuously',
+    schedule_interval=timedelta(minutes=10),  # Set the interval as needed
 )
 
-def run_monitoring():
-    monitor_order_books("btc_usd")
-
-run_monitoring_task = PythonOperator(
-    task_id='run_monitoring',
-    python_callable=run_monitoring,
+monitor_task = PythonOperator(
+    task_id='run_order_book_monitoring',
+    python_callable=monitor_order_books,
+    op_args=["btc_usd"],  # Pass any arguments needed by the function
     dag=dag,
 )
 
-run_monitoring_task
+monitor_task
+
