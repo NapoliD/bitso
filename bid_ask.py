@@ -106,3 +106,4 @@ def monitor_order_books(pair):
                 send_alert(pair, spread, thresholds)  # Check if the spread exceeds any custom thresholds
         
         time.sleep(1)
+monitor_order_books("btc_mxn".lower())
