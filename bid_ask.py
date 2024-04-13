@@ -62,7 +62,7 @@ def monitor_order_books(pair):
     thresholds = [1.0, 0.5, 0.1]  # Custom thresholds for the spread percentage
     while True:
         current_time = time.time()  # Get the current time
-        if current_time - start_time >= 5:  # Check if 50 seconds have elapsed (approximately 10 minutes)
+        if current_time - start_time >= 600:  # Check if 50 seconds have elapsed (approximately 10 minutes)
             filename = f"{OUTPUT_DIR}/{pair}order_book{int(current_time)}.csv"  # Generate the filename with timestamp
             write_to_csv(records, filename)  # Write records to CSV
             print(f"File {filename} has been stored.")  # Print a message indicating the file has been stored
