@@ -69,6 +69,4 @@ csv
 -  Alerts can be configured to be sent to Slack or via email with prepared reports.
 
 ## Justification of partition in S3
-- Here's a revised version:
-
 - Organizing files into subfolders by year and month not only streamlines data management and access but also simplifies data lifecycle   management on S3, especially for automated transitions to Glacier storage. I would recommend storing daily data in CSV format initially and later archiving historical data in .parquet format. This format is efficient for storage and processing, compatible with Spark, Athena, and Redshift. Additionally, it optimizes data partitioning, enhancing performance in queries and analysis.
