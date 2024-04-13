@@ -11,7 +11,7 @@ This Python program allows you to monitor cryptocurrency order books and save th
 
 ## Installation
 
-1. Clone this repository or download the `monitor_order_books_.py` and `bid_ask.py` files.
+1. Clone this repository or download the `bid_ask.py` file.
 2. Install the necessary dependencies using `pip`:
 Dependencies:
 
@@ -40,9 +40,9 @@ csv
 
 ## Usage
 
-1. Make sure you have the `bid_ask.py` file in the same directory as `monitor_order_books_.py`. This file contains the necessary functions for the main program.
+1. Make sure you have the `bid_ask.py` file . This file contains the necessary functions for the main program.
    
-2. Run the `monitor_order_books_.py` program with the trading pair you want to monitor as an argument. For example:
+2. Run the `bid_ask.py` program with the trading pair you want to monitor as an argument. For example:
 
    ```
    python monitor_ordermonitor_order_books__books.py BTC_USD
