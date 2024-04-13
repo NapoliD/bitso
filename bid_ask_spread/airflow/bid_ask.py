@@ -5,7 +5,7 @@ import time
 import pandas as pd
 import csv
 import boto3
-
+import datetime
 
 #https://docs.bitso.com/bitso-api/docs/authentication
 BITSO_API_KEY = "YOUR_API_KEY"  # Replace with your own API key
@@ -69,12 +69,21 @@ def save_to_s3(records, filename):
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY
     )
     try:
+        # Obtener la fecha actual
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+
+        folder_name = f"{year}/{month:02d}"
+
+        key = f"{folder_name}/{filename}"
+        # Guardar el objeto en S3
         s3.put_object(
             Bucket=S3_BUCKET_NAME,
-            Key=filename,
+            Key=key,
             Body=records
         )
-        print(f"Archivo guardado en S3: {filename}")
+        print(f"Archivo guardado en S3: {key}")
     except Exception as e:
         print(f"Error al guardar archivo en S3: {e}")
 
