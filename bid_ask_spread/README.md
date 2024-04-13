@@ -65,4 +65,6 @@ csv
 
 ## For Airflow
 -  For Airflow, there are two example DAGs in the Airflow folder.
+## Alerts and Reporting
+-  Alerts can be configured to be sent to Slack or via email with prepared reports.
 
