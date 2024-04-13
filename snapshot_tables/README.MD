@@ -34,7 +34,7 @@ The CSV files used to load data into the database must respect the names informe
 
 ## TO create a ETL process daily batches
 
-If we need to create an ETL so that it automatically saves data, we can use the example insert_data_example.py and replicate for n tables.
+If we need to create an etl to automatically save data, we can use the example insert_data_example.py and create a list with the different datasets to save in the database. If it is bach it can be done with stepfunction and lambda.
 
 ## Requirements
 
