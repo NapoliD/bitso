@@ -29,7 +29,7 @@ csv
 
 ## Configuration
 
-1. Open the `monitor_order_books.py` file in a text editor.
+1. Open the `bid_ask.py` file in a text editor.
 2. Replace the following variables with your own credentials:
 
    - `BITSO_API_KEY`: Your Bitso API Key.
@@ -37,18 +37,15 @@ csv
    - `AWS_ACCESS_KEY_ID`: Your AWS Access Key ID.
    - `AWS_SECRET_ACCESS_KEY`: Your AWS Secret Access Key.
    - `S3_BUCKET_NAME`: The name of your Amazon S3 bucket where you want to store the files.
+   - `monitor_order_books("-----".lower())`
 
 ## Usage
 
 1. Make sure you have the `bid_ask.py` file . This file contains the necessary functions for the main program.
    
-2. Run the `bid_ask.py` program with the trading pair you want to monitor as an argument. For example:
+2. Run the `bid_ask.py` program with the trading pair you want to monitor as an argument.
 
-   ```
-   python monitor_ordermonitor_order_books__books.py BTC_USD
-   ```
-
-   This will start monitoring the order book for the `BTC_USD` trading pair and save the data locally as CSV files and in Amazon S3.
+   This will start monitoring the order book for example `btc_mxn` trading pair and save the data locally as CSV files and in Amazon S3.
 
 3. The program will run continuously and update every 10 seconds, collecting data from the order book and saving it to the files.
 
