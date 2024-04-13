@@ -32,6 +32,10 @@ The CSV files used to load data into the database must respect the names informe
 - `event_sample_data.csv`: Contains event data.
 - `user_id_sample_data.csv`: Contains user_id data.
 
+## TO create a ETL
+
+If we need to create an etl so that it automatically saves data, we can use the example insert_data_example.py
+
 ## Requirements
 
 - Python 3.x
