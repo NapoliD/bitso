@@ -3,10 +3,17 @@ import hmac
 import hashlib
 import time
 import pandas as pd
+import csv
+import boto3
+
 
 #https://docs.bitso.com/bitso-api/docs/authentication
 BITSO_API_KEY = "YOUR_API_KEY"  # Replace with your own API key
 BITSO_API_SECRET = "YOUR_API_SECRET"  # Replace with your own API secret
+
+AWS_ACCESS_KEY_ID = "YOUR_AWS_ACCESS_KEY_ID"
+AWS_SECRET_ACCESS_KEY = "YOUR_AWS_SECRET_ACCESS_KEY"
+S3_BUCKET_NAME = "your-s3-bucket-name"
 
 OUTPUT_DIR = "data_lake"
 
@@ -55,6 +62,22 @@ def send_alert(pair, spread, thresholds):
         if spread > threshold:
             return print(f"Alert: The spread for pair {pair} has exceeded {threshold}%")
 
+def save_to_s3(records, filename):
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+    )
+    try:
+        s3.put_object(
+            Bucket=S3_BUCKET_NAME,
+            Key=filename,
+            Body=records
+        )
+        print(f"Archivo guardado en S3: {filename}")
+    except Exception as e:
+        print(f"Error al guardar archivo en S3: {e}")
+
 # Function to continuously monitor order books for a given pair
 def monitor_order_books(pair):
     records = []  # Initialize an empty list to store records
@@ -65,6 +88,7 @@ def monitor_order_books(pair):
         if current_time - start_time >= 5:  # Check if 50 seconds have elapsed (approximately 10 minutes)
             filename = f"{OUTPUT_DIR}/{pair}order_book{int(current_time)}.csv"  # Generate the filename with timestamp
             write_to_csv(records, filename)  # Write records to CSV
+            # save_to_s3(csv_data, filename) # Write records to s3
             print(f"File {filename} has been stored.")  # Print a message indicating the file has been stored
             start_time = current_time  # Update the start time
             records = []  # Clear the records list
